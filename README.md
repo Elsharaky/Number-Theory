@@ -1,5 +1,5 @@
 # Number Theory
-This repository for essential number theory laws and methods.
+This repository for essential number theory laws and methods
 
 ## Modular Arithmetic 
 
@@ -179,22 +179,48 @@ def EEA(r0,r1):
         r0 , r1 = r1 , r0
 
     while r1:
-        rt = r1 # save the value of r1
         q = (r0 // r1) # compute the quotient
-        r1 = r0 - q * r1 # compute the value of the next r and save it in r1
-        r0 = rt # save r1 in r0
+        # put r1 in r0 and compute the next r and put it in r1
+        r0 , r1 = r1 , r0 - q * r1
+        # put s1 in s0 and compute the next s and put it in s1
+        s0 , s1 = s1 , s0 - q * s1
+        # put t1 in t0 and compute the next t and put it in t1
+        t0 , t1 = t1 , t0 - q * t1
 
-        st = s1 # save the value of s1
-        s1 = s0 - q * s1 # compute the value of next s and save it in s1
-        s0 = st # save s1 in s0
-
-        tt = t1 # save the value of t1
-        t1 = t0 - q * t1 # compute the value of next t and save it in t1
-        t0 = tt # save t1 in t0
-    
     # r0 -> GCD
     # s0 -> s
     # t0 -> t
     return r0 , s0 , t0
 ```
 
+---
+## Modular Multiplicative Inverse
+
+The problem is a<sup>-1</sup> = ? (mod n)<br>a * a<sup>-1</sup> = 1 (mod n)
+
+First before computing the a<sup>-1</sup> we should know that to have a modular multiplicative inverse of number a :
+- gcd(n,a) = 1 &rarr; co-primes.
+- a<sup>-1</sup> will be withen range of (0,n-1).
+
+### Proof of modular multiplication inverse existance when gcd(n,a) = 1
+
+as we do in Extend Euclidean Algorithm.<br>gcd(n,a) = n * s + a * t<br>1 = n * s + a * t (mod n)<br>1 = 0 + (a * t) mod n<br>then there is a modular multiplicative inverse of a.
+
+### Brute force method
+
+```
+def modular_multiplicative_inverse(a,n):
+    a %= n
+    for i in range(1,n):
+        if (a * i) % n == 1:
+            return i
+    return None
+```
+
+### Extend Euclidean Algorithm method
+Apply the Extend Euclidean Algorithm and get the value of [t] this will be the modular multiplicative inverse.
+
+```
+def modular_multiplicative_inverse(a,n):
+    return EEA(n,a)[2]
+```
