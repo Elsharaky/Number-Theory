@@ -206,7 +206,7 @@ First before computing the a<sup>-1</sup> we should know that to have a modular 
 
 as we do in Extend Euclidean Algorithm.<br>gcd(n,a) = n * s + a * t<br>1 = n * s + a * t (mod n)<br>1 = 0 + (a * t) mod n<br>then there is a modular multiplicative inverse of a.
 
-### Brute force method
+### Brute force method &rarr; O(N)
 
 ```
 def modular_multiplicative_inverse(a,n):
@@ -217,7 +217,7 @@ def modular_multiplicative_inverse(a,n):
     return None
 ```
 
-### Extend Euclidean Algorithm method
+### Extend Euclidean Algorithm method &rarr; O(Log N)
 Apply the Extend Euclidean Algorithm and get the value of [t] this will be the modular multiplicative inverse.
 
 ```
