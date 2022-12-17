@@ -43,6 +43,21 @@ def fast_power(x,n):
     return ans
 ```
 ---
+## Fermat’s little theorem & Primality testing
+
+Fermat’s little theorem : if **P** is prime number and **a** is any positive integer not divisible by **P** then: <br> $a^{P - 1}$ = 1 (mod P) <br> for all values of **a** between 1 and **P-1**
+
+```
+import random
+def fermat(n: int,k:int = 128) -> bool:
+    for _ in range(k):
+        x = random.randint(1,n-1)
+        if pow(x,n-1,n) != 1:
+            return False
+    return True
+```
+
+---
 ## Factorization 
 
 **Factorization means to find all factors (divisors) of a number**
@@ -190,7 +205,7 @@ def EEA(r0,r1):
     # r0 -> GCD
     # s0 -> s
     # t0 -> t
-    return r0 , s0 , t0
+    return r0 , s0 , t0      # return t0 % the initial r0 to get positive value (for Modular Multiplication Inverse).
 ```
 
 ---
